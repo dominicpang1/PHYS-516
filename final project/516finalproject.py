@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import random 
 # closed universe k = 1
 # lambda determines what dark energy is  
-#  
+
 # is each path a state
 # get change in energy per new path rather than calculating and comparing actions
 lambd = -1

@@ -1,12 +1,18 @@
 import numpy as np
 from numba import njit
 import matplotlib.pyplot as plt
-lambd = -1.0
-k = 1
 
+#properties of the universe 
+lambd = -1.0
+k = 0
+
+# time scale and timesteps
 T = 15.0
 N = 1500
 
+#Wavefunc visualization params
+bounds = 2 
+num_trans_amp = 50
 
 @njit
 def pathgrid(start,end,t,T,a,b,c):
@@ -78,12 +84,12 @@ def vizPath(start,end,t,T,a,b,c):
 
 def main():
     fig,ax = plt.subplots()
-    ax.set_title(r"Wavefunction of Universe with $\Lambda=-1$ and k = 1")
+
+    ax.set_title(r"Wavefunction of Universe with $\Lambda$="+str(lambd)+"  and k = "+str(k))
     ax.set_xlabel("A")
     ax.set_ylabel(r'$|\psi(x)|^2$')
-    # wavefuncViz(2,50,ax)
-    wavefuncViz(2,50,ax)
-    # wavefuncViz(2,25,ax)
+    wavefuncViz(bounds,num_trans_amp,ax)
+
   
     plt.legend()
     plt.show()
