@@ -2,6 +2,13 @@ import numpy as np
 from numba import njit
 import matplotlib.pyplot as plt
 
+
+# Run 1:
+# lambd = - 1, k = 1, T = 15, N = 1500, bounds = 2, nums_trans_amp =  =100
+# Run 2: 
+# lambd = - 1, k = 0, T = 15, N = 1500, bounds = 3, nums_trans_amp = 50 
+
+
 #properties of the universe 
 lambd = -1.0
 k = 0
