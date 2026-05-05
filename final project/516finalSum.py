@@ -6,20 +6,20 @@ import matplotlib.pyplot as plt
 # Run 1:
 # lambd = - 1, k = 1, T = 15, N = 1500, bounds = 2, nums_trans_amp =  =100
 # Run 2: 
-# lambd = - 1, k = 0, T = 15, N = 1500, bounds = 3, nums_trans_amp = 50 
+# lambd = - 1, k = 0, T = 15, N = 1500, bounds = 2, nums_trans_amp = 50 
 
 
 #properties of the universe 
-lambd = -1.0
-k = 0
+lambd = -1
+k = 1
 
 # time scale and timesteps
-T = 15.0
+T = 15
 N = 1500
 
 #Wavefunc visualization params
 bounds = 2 
-num_trans_amp = 50
+num_trans_amp = 100
 
 @njit
 def pathgrid(start,end,t,T,a,b,c):
@@ -71,9 +71,16 @@ def wavefunc(A,num,T,lambd,k):
         trans_arr[i]=transition_amp(0.0,A_arr[i],t,T,lambd,k)
     return A_arr,trans_arr # squared trans_arr is probability density
 
+def normalize(x,y):
+    import scipy.integrate as integrate
+    sum = integrate.simpson(y,x)
+    return y/sum
+
 def wavefuncViz(A,num,ax):
-    A_arr,prob_dens=wavefunc(A,num,T,lambd,k)
-    ax.plot(A_arr,prob_dens**2,label = str(num)+' transition amplitudes')
+    A_arr,trans_amp=wavefunc(A,num,T,lambd,k)
+    prob_dens = trans_amp**2
+    prob_dens = normalize(A_arr,prob_dens)
+    ax.plot(A_arr,prob_dens,label = str(num)+' transition amplitudes')
 
 def vizPath(start,end,t,T,a,b,c):
     path = pathgrid(start,end,t,T,a,b,c)
